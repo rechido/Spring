@@ -1,0 +1,11 @@
+mysql> USE my_database;
+mysql> show variables like "character_set_database";
+
+혹은 status 명령어로 체크 가능
+
+* DB에 한글 데이터가 안 들어갈 시 해결법
+-> UTF8 인코딩을 갖는 새 DB를 만든다.
+
+CREATE DATABASE `mydb` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+

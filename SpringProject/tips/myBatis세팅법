@@ -1,0 +1,2 @@
+1. mapper.xml파일 만들기
+interface로 매핑될 sql의 메소드 선언

@@ -1,0 +1,9 @@
+	<!-- DataSource -->	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/kmove30?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="12345"></property>
+	</bean>	
+	
+	위와 같이 url에 ?useUnicode=true&characterEncoding=utf8 붙여주면 해결됨. xml파일은 &기호 넣으면 에러나므로 특수기호처리해줌.

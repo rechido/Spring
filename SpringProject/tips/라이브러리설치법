@@ -1,0 +1,4 @@
+pom.xml에 매핑해주면 자동으로 maven repository에서 다운
+어떤 버전을 받을 수 있는지는 maven repository 사이트에 들어가서 검색으로 확인
+
+매핑 태그 자체를 복붙해올 수 있다.

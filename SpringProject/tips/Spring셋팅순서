@@ -1,0 +1,36 @@
+1. jdk버전 변경 1.6->1.8로 (프로젝트 우클릭-properties-project facets에서 java버전 바꿈)
+2. pom.xml에 필요한 maven dependencies 설치. (maven dependencies 설치할 것들.txt 파일 참조)
+3. 제일 먼저 project run on server 해보고 home.jsp 잘 불러지는지 확인 -> 한글 깨질 경우 page tag로 charset=utf-8 해줄것
+4. web.xml에 encoding filter 삽입
+5. SampleController.java - result.jsp 로 문자열 출력 확인
+6. ProductVO.java - SampleController2.java - productDetail.jsp 순으로 작성하여 bean 사용법 숙지
+7. MySQLConnectionTest.java 작성하여 junit test 실시. 접속 테스트 성공시 다음단계로
+8. rootContext.xml에 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 추가 (내용은 소스참조)
+  - DataSourceTest.java 작성 후 테스트. 테스트 성공시 다음단계로.
+9. rootContext.xml에 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 과
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache"> 태그를 추가.
+	- MybatisTest.java 작성 후 테스트 - 성공 시 다음 단계로.
+10. MemberVO.java, MemberDAO.java, MemberDAOImple.java, memberMapper.xml 작성
+	- root-context.xml에 <context:component-scan base-package="com.spring.persistence" /> 추가하고 com.spring.persistence 패키지 아래 java파일에 S표시 붙는지 확인.
+	- MemberDAOTest.java 작성 후 testTime 메소드 테스트. 시간이 잘 나올 시 testInsertMember() 테스트. 한글 안 깨져 들어가는지 확인.
+	
+	*한글이 깨질 경우 다음 세 가지를 체크.
+	1. cmd로 mysql에 접속하여 해당 db의 character set이 utf8인지 확인 (아닐 경우 db를 새로 만들것. tips/mysql언어체크.txt 참조)
+	2. 쿼리박스에서는 한글이 ???로 나오지만 cmd상에서 mysql로 접속해서 select하면 한글 잘 나올 경우 - 쿼리박스 접속시 utf8로 인코딩 설정 했는지 확인
+	3. root-context.xml에 DataSource bean url 뒤에 ?useUnicode=true&amp;characterEncoding=utf8 붙이기
+	
+11. BoardVO.java - boardMapper.xml - BoardDAO.java - BoardDAOImple.java 작성 후 (미리 tbl_board 테이블 mysql db에 만들것)
+	- BoardDAOTest.java 작성 후 테스트
+	테스트 순서는 create - delete - update - read - listAll
+	* select문을 던질 경우 Caused by: java.lang.ClassNotFoundException: Cannot find class: BoardVO 가 발생하는 경우가 있다.
+	 이것은 resultType에 BoardVO 클래스의 풀네임을 적어주지 않아서 발생.
+	 <select id="read" resultType="com.spring.domain.BoardVO">
+	와 같이 적어줄것.
+	
+12. BoardService.java - BoardServiceImpl.java - BoardController.java 작성
+	이때 root-context.xml에 
+	<context:component-scan base-package="com.spring.service" />
+	추가해주고 com.spring.service 패키지 아래 java파일에 S표시 생기는지 체크.
+	위 파일들 실행 잘 되는지 확인하려면 먼저 프로젝트를 run on server 하고 url을 
+	http://localhost:8080/controller/board/listAll
+	로 입력하여 log 잘 뜨는지 확인.
