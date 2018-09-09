@@ -17,6 +17,6 @@ public class MybatisTest {
 	
 	@Test
 	public void testFactory(){
-		System.out.println(sqlFactory);
+		System.out.println(sqlFactory + " <- 이게 보인다면 성공");
 	}
 }

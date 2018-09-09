@@ -14,11 +14,11 @@ drop table tbl_board;
 insert into
 	tbl_board(title, content, writer)
 VALUES
-	('Á¦¸ñ1','³»¿ë1','ÀúÀÚ1');
+	('ì œëª©1','ë‚´ìš©1','ì €ì1');
 
-	select 
-			*
-		from
-			tbl_board
-		where 
-			bno=1;
+select 
+		*
+	from
+		tbl_board
+	where 
+		bno=1;
