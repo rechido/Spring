@@ -23,10 +23,10 @@ public class BoardDAOTest {
 	@Inject
 	private BoardDAO dao;
 	
-	//@Test
+	@Test
 	public void testCreate() throws Exception{
 		BoardVO vo = new BoardVO();
-		vo.setTitle("제목5");
+		vo.setTitle("제목7");
 		vo.setContent("내용2");
 		vo.setWriter("저자2");
 		
@@ -53,7 +53,7 @@ public class BoardDAOTest {
 		logger.info("##read: " + dao.read(1).toString());		
 	}
 	
-	@Test
+	//@Test
 	public void testListAll() throws Exception{
 		List<BoardVO> list = dao.listAll();
 		for(BoardVO vo : list)

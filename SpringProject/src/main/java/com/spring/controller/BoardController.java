@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.domain.BoardVO;
+import com.spring.persistence.BoardDAO;
 import com.spring.service.BoardService;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
+	@Inject
+	private BoardDAO dao;
 	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {
@@ -40,7 +43,9 @@ public class BoardController {
 	public String registerPOST(BoardVO boardVO, Model model) throws Exception {
 		logger.info("register POST~~~~~~");
 		
-		service.create(boardVO);
+		//service.create(boardVO);
+		dao.create(boardVO);
+		
 		model.addAttribute("result", "Success!!");
 		
 		return "/board/success"; // success.jsp 호출
