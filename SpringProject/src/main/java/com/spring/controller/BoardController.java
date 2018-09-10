@@ -26,9 +26,29 @@ public class BoardController {
 	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {
-		List<BoardVO> list = service.listAll();
-		for(BoardVO vo : list)
-			logger.info("##listAll: " + vo.toString());
+		model.addAttribute("list", service.listAll());
 	}
+	
+	// 화면 띄워주는 메소드
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public void registerGET(BoardVO boardVO, Model model) throws Exception {
+		logger.info("register GET~~~~~~");
+	}
+	
+	// register form 제출시 응답하는 메소드
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String registerPOST(BoardVO boardVO, Model model) throws Exception {
+		logger.info("register POST~~~~~~");
+		
+		service.create(boardVO);
+		model.addAttribute("result", "Success!!");
+		
+		return "/board/success"; // success.jsp 호출
+	}
+	
+//	@RequestMapping(value = "/read")
+//	public void read(Model model) throws Exception {
+//		model.addAllAttributes("vo", )
+//	}
 	
 }

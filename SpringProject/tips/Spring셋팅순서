@@ -1,5 +1,5 @@
 1. jdk버전 변경 1.6->1.8로 (프로젝트 우클릭-properties-project facets에서 java버전 바꿈)
-2. pom.xml에 필요한 maven dependencies 설치. (maven dependencies 설치할 것들.txt 파일 참조)
+2. pom.xml에 필요한 maven dependencies 설치. (tips/maven dependencies 설치할 것들.txt 파일 참조)
 3. 제일 먼저 project run on server 해보고 home.jsp 잘 불러지는지 확인 -> 한글 깨질 경우 page tag로 charset=utf-8 해줄것
 4. web.xml에 encoding filter 삽입
 5. SampleController.java - result.jsp 로 문자열 출력 확인
@@ -27,6 +27,12 @@
 	 <select id="read" resultType="com.spring.domain.BoardVO">
 	와 같이 적어줄것.
 	
+	패키지명 생략하고 싶을 시 mybatis-config.xml에 
+	<typeAliases>
+  		<package name="com.spring.domain"/>
+  	</typeAliases>
+  	추가
+	
 12. BoardService.java - BoardServiceImpl.java - BoardController.java 작성
 	이때 root-context.xml에 
 	<context:component-scan base-package="com.spring.service" />
@@ -34,3 +40,37 @@
 	위 파일들 실행 잘 되는지 확인하려면 먼저 프로젝트를 run on server 하고 url을 
 	http://localhost:8080/controller/board/listAll
 	로 입력하여 log 잘 뜨는지 확인.
+	
+13. bootstrap 입히기
+bootstrap 폴더
+dist 폴더
+plugins 폴더
+
+위 3개의 폴더는 src/main/webapp/resources 폴더로 복사
+
+include 폴더는 /WEB-INF/views 폴더로 복사
+
+project를 run on server로 했을때 초기 url이 root ("/")로 잘 잡히는지 체크
+http://localhost:8080/controller와 같이 뭔가 뒤에 같이 나올 경우,
+server-tomcat 더블 클릭-modules탭 - path를 edit하여 "/"로 수정
+이와 같이 해주지 않을 경우 header, footer.jsp의 link, a 태그에 불러오고 있는 /resources/ 폴더를 인식 못함.
+
+그 이후 사용하려는 jsp 페이지에
+
+<%@ include file="include/header.jsp" %>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">HOME PAGE</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<%@ include file="include/footer.jsp" %>
+
+이와 같이 html, body 태그 등 전부 삭제 후 위아래로 header, footer include하여 사용

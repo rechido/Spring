@@ -27,7 +27,7 @@
 			bno=#{bno}
 	</delete>
 
-	<select id="read" resultType="com.spring.domain.BoardVO">
+	<select id="read" resultType="BoardVO">
 		select
 			*
 		from
@@ -37,7 +37,7 @@
 	</select>
 
 
-	<select id="listAll" resultType="com.spring.domain.BoardVO">
+	<select id="listAll" resultType="BoardVO">
 		select 
 			*
 		from

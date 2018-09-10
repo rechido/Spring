@@ -2,3 +2,5 @@ pom.xml에 매핑해주면 자동으로 maven repository에서 다운
 어떤 버전을 받을 수 있는지는 maven repository 사이트에 들어가서 검색으로 확인
 
 매핑 태그 자체를 복붙해올 수 있다.
+
+가끔 버그가 나므로 user/.m2/repository 폴더에 들어가 직접 파일을 삭제. (maven dependencies에서 삭제해도 원본파일이 남아있음)
