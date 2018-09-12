@@ -1,0 +1,9 @@
+1. db에 table 작성
+2. domain패키지에 VO 작성
+3. src/main/resources/mappers에 Mapper.xml 작성
+4. persistence패키지에 DAO 인터페이스 작성
+5. persistence패키지에 DAOImpl 작성
+6. service패키지에 Service 인터페이스 작성
+6. service패키지에 ServiceImpl 작성
+7. Controller에 페이지 Requestmapping method 작성
+8. src/main/webapp/WEB-INF/views/에 jsp 페이지 작성

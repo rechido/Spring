@@ -33,3 +33,12 @@
 </div>
 	
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+	var result = '${result}'; // BoardController.java 에서 redirectAtt.addFlashAttribute("result", "Success!!");로 보낸 패러미터 호출
+	// result = 'success';
+	
+	if(result == 'Success!!'){
+		alert("글이 작성 되었습니다!!");
+	}
+</script>

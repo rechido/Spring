@@ -2,7 +2,7 @@ package com.spring.domain;
 
 import java.util.Date;
 
-public class BoardVO {
+public class BoardVO { // VO: value object
 
 	private Integer bno;
 	private String title;	

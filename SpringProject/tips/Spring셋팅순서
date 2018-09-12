@@ -7,6 +7,21 @@
 7. MySQLConnectionTest.java 작성하여 junit test 실시. 접속 테스트 성공시 다음단계로
 8. rootContext.xml에 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 추가 (내용은 소스참조)
   - DataSourceTest.java 작성 후 테스트. 테스트 성공시 다음단계로.
+  
+  여기서 <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>는 기본 드라이버고 
+  <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property> 는 내부쿼리문 로깅 지원하는 드라이버.
+  일단 기본 드라이버로 먼저 진행해보고 myBatisTest까지 끝낸 후에 로깅을 추가하는 편이 좋다.
+  단, 로깅을 하려면 src/main/resource/log4jdbc.log4j2.properties 파일이 필요.
+  또한 maven dependencies에 log4jdbc-log4j2-jdbc4-1.16.jar 있는지 체크. 없으면 maven repository에서 다운.
+  
+  * 내부쿼리문 로깅 안나오는 문제
+  	<root>
+		<!-- <priority value="warn" /> -->
+		<priority value="info" />
+		<appender-ref ref="console" />
+	</root>
+	log4j.xml파일의 루트 로거 레벨을 info로 바꾼다. log4j.xml파일이 src/main/resources 와 src/test/resources에 있으므로 둘다 바꿀것.
+  
 9. rootContext.xml에 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 과
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache"> 태그를 추가.
 	- MybatisTest.java 작성 후 테스트 - 성공 시 다음 단계로.
@@ -19,9 +34,10 @@
 	2. 쿼리박스에서는 한글이 ???로 나오지만 cmd상에서 mysql로 접속해서 select하면 한글 잘 나올 경우 - 쿼리박스 접속시 utf8로 인코딩 설정 했는지 확인
 	3. root-context.xml에 DataSource bean url 뒤에 ?useUnicode=true&amp;characterEncoding=utf8 붙이기
 	
-11. BoardVO.java - boardMapper.xml - BoardDAO.java - BoardDAOImple.java 작성 후 (미리 tbl_board 테이블 mysql db에 만들것)
+11. BoardVO.java - boardMapper.xml - BoardDAO.java - BoardDAOImpl.java 작성 후 (미리 tbl_board 테이블 mysql db에 만들것)
 	- BoardDAOTest.java 작성 후 테스트
 	테스트 순서는 create - delete - update - read - listAll
+	
 	* select문을 던질 경우 Caused by: java.lang.ClassNotFoundException: Cannot find class: BoardVO 가 발생하는 경우가 있다.
 	 이것은 resultType에 BoardVO 클래스의 풀네임을 적어주지 않아서 발생.
 	 <select id="read" resultType="com.spring.domain.BoardVO">
@@ -74,3 +90,4 @@ server-tomcat 더블 클릭-modules탭 - path를 edit하여 "/"로 수정
 <%@ include file="include/footer.jsp" %>
 
 이와 같이 html, body 태그 등 전부 삭제 후 위아래로 header, footer include하여 사용
+
