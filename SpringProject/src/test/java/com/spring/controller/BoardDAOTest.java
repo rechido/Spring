@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.spring.domain.BoardVO;
+import com.spring.domain.Criteria;
 import com.spring.persistence.BoardDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +24,7 @@ public class BoardDAOTest {
 	@Inject
 	private BoardDAO dao;
 	
-	@Test
+	//@Test
 	public void testCreate() throws Exception{
 		BoardVO vo = new BoardVO();
 		vo.setTitle("제목7");
@@ -56,6 +57,37 @@ public class BoardDAOTest {
 	//@Test
 	public void testListAll() throws Exception{
 		List<BoardVO> list = dao.listAll();
+		for(BoardVO vo : list)
+			logger.info("##listAll: " + vo.toString());
+	}
+	
+	//@Test
+	public void testListPage() throws Exception{
+		int page = 0; // 1페이지(0,10) 2페이지(10,10) 3페이지(20,10)
+		List<BoardVO> list = dao.listPage(page);
+		for(BoardVO vo : list)
+			logger.info("##listAll: " + vo.toString());
+	}
+	
+	@Test
+	public void testListCriteria() throws Exception{
+		Criteria criteria = new Criteria();
+		criteria.setPage(3);
+		criteria.setPerPageNum(20);
+		
+		List<BoardVO> list = dao.listCriteria(criteria);
+		/*
+		select 
+			bno, title, content, writer, regdate, viewcnt 
+		from 
+			tbl_board 
+		where 
+			bno > 0 
+		order by		
+			bno desc, regdate desc 
+		limit 
+			40, 20 
+		*/
 		for(BoardVO vo : list)
 			logger.info("##listAll: " + vo.toString());
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BoardVO;
+import com.spring.domain.Criteria;
 import com.spring.persistence.BoardDAO;
 import com.spring.service.BoardService;
 
@@ -90,6 +91,15 @@ public class BoardController {
 	public void modifyPOST(int bno, Model model) throws Exception {
 		
 		model.addAttribute(service.read(bno));
+	}
+	
+	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
+	public void listCri(Criteria criteria, Model model) throws Exception {
+		logger.info("listCri()~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		logger.info("criteria.getPage(): "+criteria.getPage());
+		logger.info("criteria.getPerPageNum(): "+criteria.getPerPageNum());
+		logger.info("criteria.getPageStart(): "+criteria.getPageStart());
+		model.addAttribute("list", service.listCriteria(criteria));
 	}
 	
 }
