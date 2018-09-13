@@ -20,4 +20,6 @@ public interface BoardService {
 	public List<BoardVO> listPage(int page) throws Exception; // 일부조회 (한 페이지)
 	
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception; // 일부조회 (한 페이지)
+	
+	public int listCountCriteria(Criteria criteria) throws Exception; // 
 }

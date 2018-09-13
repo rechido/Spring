@@ -50,6 +50,13 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception {
 		return dao.listCriteria(criteria);
 	}
+
+	@Override
+	public int listCountCriteria(Criteria criteria) throws Exception {
+		
+		return dao.countPaging(criteria);
+	}
+	
 	
 	
 	

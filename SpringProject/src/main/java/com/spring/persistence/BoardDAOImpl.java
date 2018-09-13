@@ -53,4 +53,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return session.selectList(namespace + ".listCriteria", criteria);
 	}
 
+	@Override
+	public int countPaging(Criteria criteria) throws Exception {
+		
+		return session.selectOne(namespace + ".countPaging", criteria);
+	}
+	
+	
+
 }

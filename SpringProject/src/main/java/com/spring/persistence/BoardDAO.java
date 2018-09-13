@@ -21,5 +21,6 @@ public interface BoardDAO { // DAO: data access object
 	
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception; // 일부조회 (한 페이지)
 	
+	public int countPaging(Criteria criteria) throws Exception; // 전체 데이터 개수 조회
 	
 }

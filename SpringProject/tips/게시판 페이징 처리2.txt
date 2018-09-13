@@ -1,0 +1,77 @@
+1페이지 당 10개씩 게시글이 출력되는 상황
+전체글 수 122개라면 페이지 수는 13개.
+
+다음과 같이 보여야 함 -> (1|2|3|4|5...|10|Next)
+
+ex1) 현재 페이지가 3인 경우
+startPage(1) endPage(10) next(true) prev(false)
+
+ex1) 현재 페이지가 10인 경우
+startPage(1) endPage(10) next(true) prev(false)
+
+ex1) 현재 페이지가 11인 경우
+startPage(11) endPage(13) next(false) prev(true)
+
+
+
+****
+
+page
+perPageNum 변수: 한 페이지에 몇 개의 데이터(10개)를 보여주는지 결정
+totalCount 변수: 전체 데이터(레코드 개수) - sql로 추출
+startPage
+endPage
+prev
+next
+
+여섯개의 변수가 필요
+
+
+
+****
+
+
+
+1) 13/10(perPageNum) = 1.3
+2) 1.3의 올림 = 2
+3) 2의 의미는 페이지번호 10개씩 두번째 보여지는 페이지를 의미.
+	즉 화면 상의 페이지 번호는 11페이지에서 20페이지라는 의미.
+4) 2*10(perPageNum) = 20
+5) 20은 endPage의 번호
+6) 20-9=11
+7) 11은 시작페이지 번호
+
+
+
+endPage = (int)(Math.ceil(criteria.getPage()/(double)displayPageNum)*displayPageNum);
+
+criteria.getPage() // 현재 페이지 번호
+displayPageNum // 화면에 보여줄 페이지의 수
+displayPageNum = totalCount / perPageNum;
+
+ex)현재페이지가 3일때: Math.ceil(3/10)*10 = 10
+ex)현재페이지가 1일때: Math.ceil(1/10)*10 = 10
+ex)현재페이지가 20일때: Math.ceil(20/10)*10 = 20
+ex)현재페이지가 21일때: Math.ceil(21/10)*10 = 30
+
+startPage 구하기
+endPage가 구해졌으면 startPage는 단순 빼기
+
+ex) endPage가 20이라면 startPage = 11
+startPage=endPage-displayPageNum+1;
+
+최종
+
+int tempEndPage = (int)(Math.ceil(totalCount/(double)criteria.getPerPageNum()));
+if(endPage > tempEndPage){
+	endPage = tempEndPage;	
+}
+
+이전(prev) & 다음(next) 계산
+prev = startPage==1? false:true;
+next의 경우에는 뒤에 데이터가 더 남아있는지에 대한 처리이므로,
+endPage * perPageNum이 totalCount보다 작은지를 확인.
+ex) perPageNum이 10이고, endPage가 10인 상황에서 totalCount가 101이라면 next는 true가 되어야 한다.
+
+next = (endPage*criteria.getPerPageNum() >= totalCount)? false:true;
+

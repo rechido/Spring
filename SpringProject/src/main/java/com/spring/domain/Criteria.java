@@ -27,10 +27,10 @@ public class Criteria {
 	}
 
 	public void setPerPageNum(int perPageNum) {
-		if(perPageNum <= 0 || perPageNum > 100){
-			this.perPageNum = 10;
-			return;
-		}
+//		if(perPageNum <= 0 || perPageNum > 100){
+//			this.perPageNum = 10;
+//			return;
+//		}
 		this.perPageNum = perPageNum;
 	}
 	
@@ -42,7 +42,7 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [page = " + page + ", perPageNum= " + perPageNum + "]";
+		return "Criteria [현재 page = " + page + ", 출력데이터갯수 perPageNum= " + perPageNum + "]";
 	}
 	
 	/*

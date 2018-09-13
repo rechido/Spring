@@ -76,5 +76,18 @@
 		
 		]]> <!-- xml에서 문제 생길 여지가 있는 >, < 등의 부호는 CDATA로 안전장치 처리해준다. -->
 	</select>
+	
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+		
+		select
+			count(bno)
+		from
+			tbl_board
+		where
+			bno > 0	
+		
+		]]> <!-- xml에서 문제 생길 여지가 있는 >, < 등의 부호는 CDATA로 안전장치 처리해준다. -->
+	</select>
 
 </mapper>
