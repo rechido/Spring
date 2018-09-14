@@ -1,6 +1,13 @@
 package com.spring.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.spring.controller.BoardController;
+
 public class Criteria {
+	
+	private static final Logger logger = LoggerFactory.getLogger(Criteria.class);
 	
 	private int page;
 	private int perPageNum;
@@ -8,6 +15,7 @@ public class Criteria {
 	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 10;
+		logger.info("Criteria() 기본생성자~~~~~~~~~~~~~~~~~~~~~~~");
 	}
 
 	public int getPage() {

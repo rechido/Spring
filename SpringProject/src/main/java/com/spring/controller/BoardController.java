@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +60,7 @@ public class BoardController {
 		// model.addAttribute("result", "Success!!"); // get방식 전달이라
 		// http://localhost:8080/controller/board/listAll?result=Success%21%21 와
 		// 같이 패러미터가 url 뒤에 붙어서 날아감.
-		redirectAtt.addFlashAttribute("result", "Success!!"); // 이제 url뒤에 패러미터를
+		redirectAtt.addFlashAttribute("result", "write"); // 이제 url뒤에 패러미터를
 																// 붙여서 날아가지 않는다.
 																// // 호출할 때는
 																// ${result}
@@ -81,8 +82,8 @@ public class BoardController {
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("bno") int bno, RedirectAttributes redirectAtt) throws Exception {
 		service.delete(bno);
-		redirectAtt.addFlashAttribute("msg_remove", "글이 삭제 되었습니다."); // ${msg_remove}로
-																		// 호출
+		redirectAtt.addFlashAttribute("msg_remove", "글이 삭제 되었습니다."); // ${msg_remove}로 호출
+																		
 
 		return "redirect:/board/listAll";
 	}
@@ -100,7 +101,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void modifyPOST(int bno, Model model) throws Exception {
+	public void modifyGET(int bno, Model model) throws Exception {
 
 		model.addAttribute(service.read(bno));
 	}
@@ -116,7 +117,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(Criteria criteria, Model model) throws Exception {
-		logger.info(criteria.toString());
+		logger.info("##listPage(Criteria criteria, Model model): "+criteria.toString());
 		
 		model.addAttribute("list", service.listCriteria(criteria));
 		
@@ -127,4 +128,67 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 	}
+	
+	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
+	public void readPage(@RequestParam("bno") int bno, @ModelAttribute("criteria") Criteria criteria, Model model) throws Exception {
+		logger.info("##readPage: "+criteria.toString());
+		model.addAttribute(service.read(bno));
+	}
+	
+	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
+	public String removePage(@RequestParam("bno") int bno, RedirectAttributes redirectAtt, Criteria criteria) throws Exception {
+		logger.info("##removePage: "+criteria.toString());
+		service.delete(bno);
+		
+		redirectAtt.addAttribute("page", criteria.getPage());
+		redirectAtt.addAttribute("perPageNum", criteria.getPerPageNum());
+		redirectAtt.addFlashAttribute("result", "remove"); // addAttribute는 session에 저장한 효과, addFlashAttribute는 단발성(휘발성)
+
+		return "redirect:/board/listPage";
+	}
+	
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
+	public String modifyPagePOST(BoardVO boardVO, Criteria criteria, RedirectAttributes redirectAtt) throws Exception {
+		
+		logger.info("#modifyPagePOST()~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+		service.update(boardVO);
+
+		redirectAtt.addAttribute("page", criteria.getPage());
+		redirectAtt.addAttribute("perPageNum", criteria.getPerPageNum());
+		redirectAtt.addFlashAttribute("result", "modify");
+
+		return "redirect:/board/listPage";
+	}
+
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
+	public void modifyPageGET(@RequestParam("bno") int bno, @ModelAttribute("criteria") Criteria criteria, Model model) throws Exception {
+
+		logger.info("#modifyPageGET()~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		model.addAttribute(service.read(bno));
+	}
+	
+	// 화면 띄워주는 메소드
+		@RequestMapping(value = "/registerPage", method = RequestMethod.GET)
+		public void registerPageGET(BoardVO boardVO, @ModelAttribute("criteria") Criteria criteria, Model model) throws Exception {
+			logger.info("register GET~~~~~~");
+		}
+
+		// register form 제출시 응답하는 메소드
+		@RequestMapping(value = "/registerPage", method = RequestMethod.POST)
+		public String registerPagePOST(BoardVO boardVO, Criteria criteria, RedirectAttributes redirectAtt) throws Exception { 
+																							
+
+			logger.info("register POST~~~~~~");
+
+			service.create(boardVO); 
+			
+			redirectAtt.addAttribute("page", criteria.getPage());
+			redirectAtt.addAttribute("perPageNum", criteria.getPerPageNum());
+			redirectAtt.addFlashAttribute("result", "write"); 
+			
+			return "redirect:/board/listPage"; 
+		}
+	
 }
