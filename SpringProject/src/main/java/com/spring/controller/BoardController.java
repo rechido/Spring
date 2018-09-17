@@ -117,7 +117,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(Criteria criteria, Model model) throws Exception {
-		logger.info("##listPage(Criteria criteria, Model model): "+criteria.toString());
+		logger.info("##listPage: "+criteria.toString());
 		
 		model.addAttribute("list", service.listCriteria(criteria));
 		
