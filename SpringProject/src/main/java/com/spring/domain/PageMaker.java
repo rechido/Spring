@@ -29,12 +29,25 @@ public class PageMaker {
 	
 	
 	public String makeParameter(int page){
-		UriComponents uriComponents =
-				UriComponentsBuilder.newInstance()
-				//.path("/{module}/{page}")
-				.queryParam("page", page)
-				.queryParam("perPageNum", criteria.getPerPageNum())
-				.build(); // ex) ?page=1&perPageNum=10
+		UriComponents uriComponents;
+		
+//		if(this.criteria.isSearchParameter){
+//			uriComponents = UriComponentsBuilder.newInstance()
+//					//.path("/{module}/{page}")
+//					.queryParam("page", page)
+//					.queryParam("perPageNum", ((SearchCriteria)criteria).getPerPageNum())
+//					.queryParam("searchType", ((SearchCriteria)criteria).getSearchType())
+//					.queryParam("keyword", ((SearchCriteria)criteria).getKeyword())
+//					.build(); // ex) ?page=1&perPageNum=10
+//		}else{
+			uriComponents = UriComponentsBuilder.newInstance()
+					//.path("/{module}/{page}")
+					.queryParam("page", page)
+					.queryParam("perPageNum", criteria.getPerPageNum())
+					.build(); // ex) ?page=1&perPageNum=10
+//		}
+		
+				
 		//logger.info("makePerPageNum(int page): "+uriComponents.toString());
 		
 		

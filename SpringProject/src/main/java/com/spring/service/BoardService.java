@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.domain.BoardVO;
 import com.spring.domain.Criteria;
+import com.spring.domain.SearchCriteria;
 
 public interface BoardService {	
 	
@@ -22,4 +23,8 @@ public interface BoardService {
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception; // 일부조회 (한 페이지)
 	
 	public int listCountCriteria(Criteria criteria) throws Exception; // 
+	
+	public List<BoardVO> listSearch(SearchCriteria criteria) throws Exception; // 검색 조회 (리스트, 한 페이지)
+	
+	public int listSearchCount(SearchCriteria criteria) throws Exception; // 검색 조회 게시글 수
 }

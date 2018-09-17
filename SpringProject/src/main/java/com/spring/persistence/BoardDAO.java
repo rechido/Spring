@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.domain.BoardVO;
 import com.spring.domain.Criteria;
+import com.spring.domain.SearchCriteria;
 
 public interface BoardDAO { // DAO: data access object
 	
@@ -22,5 +23,9 @@ public interface BoardDAO { // DAO: data access object
 	public List<BoardVO> listCriteria(Criteria criteria) throws Exception; // 일부조회 (한 페이지)
 	
 	public int countPaging(Criteria criteria) throws Exception; // 전체 데이터 개수 조회
+	
+	public List<BoardVO> listSearch(SearchCriteria criteria) throws Exception; // 검색 조회 (리스트, 한 페이지)
+	
+	public int listSearchCount(SearchCriteria criteria) throws Exception; // 검색 조회 게시글 수
 	
 }

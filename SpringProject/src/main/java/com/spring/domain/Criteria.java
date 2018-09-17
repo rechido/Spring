@@ -11,12 +11,25 @@ public class Criteria {
 	
 	private int page;
 	private int perPageNum;
+	boolean isSearchParameter;
 	
 	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 10;
+		this.isSearchParameter = false;
 		logger.info("Criteria() 기본생성자~~~~~~~~~~~~~~~~~~~~~~~");
 	}
+	
+	
+
+	public Criteria(boolean isSearchParameter) {
+		this.page = 1;
+		this.perPageNum = 10;
+		this.isSearchParameter = isSearchParameter;
+		logger.info("Criteria(boolean isSearchParameter)~~~~~~~~~~~~~~~~~~~~~~~");
+	}
+
+
 
 	public int getPage() {
 		return page;

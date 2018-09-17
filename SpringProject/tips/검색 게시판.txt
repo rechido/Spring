@@ -1,0 +1,10 @@
+검색 게시판
+
+1. 현재 페이지 번호 (page)
+2. 페이지당 보여지는 게시물 수 (perPageNum)
+3. 검색의 타입(종류) 작성자, 내용 등등
+4. 검색의 키워드
+
+SearchCriteria
+
+SearchBoardController
