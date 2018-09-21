@@ -1,3 +1,4 @@
+0. new - Spring Project - Spring MVC Project로 생성
 1. jdk버전 변경 1.6->1.8로 (프로젝트 우클릭-properties-project facets에서 java버전 바꿈)
 2. pom.xml에 필요한 maven dependencies 설치. (tips/maven dependencies 설치할 것들.txt 파일 참조)
 3. 제일 먼저 project run on server 해보고 home.jsp 잘 불러지는지 확인 -> 한글 깨질 경우 page tag로 charset=utf-8 해줄것

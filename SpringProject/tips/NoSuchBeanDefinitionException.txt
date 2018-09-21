@@ -1,0 +1,8 @@
+* 어노테이션이 빠질 경우 NoSuchBeanDefinitionException이 뜰 수 있다.
+
+Autowiring에 실패했다고 뜨면서 해당 파일 및 연관 파일을 알려준다.
+
+@Inject에 문제 있다고 뜰 시 Inject한 인터페이스나 그걸 상속받은 클래스에 S표시 잘 떴는지 체크. 어노테이션 빠트려서 에러나는 경우 있음.
+
+@Controller
+@Service 등

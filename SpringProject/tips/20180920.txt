@@ -1,0 +1,24 @@
+board/123 - URI
+URI는 하나의 고유한 리소스를 갖는다.
+
+REST -> REST API
+(Representation State Transfer)
+
+@RestController
+@pathVariable - URI 경로에서 원하는 데이터 추출
+@RequestBody - 전송된 json을 객체로 변환
+@ModelAttribute - 전송된 ${EL}을 객체로 변환 ex) @ModelAttribute("criteria") SearchCriteria criteria
+
+
+
+*xml - 기존 문서 형식
+json - 기존의 xml 타입이 전달하려는 정보보다 많은 양의 태그를 요구해 더 심플하게 줄인 문서형식
+-> jackson
+
+*웹브라우저의 상태코드
+
+Advanced REST Client
+
+*ReplyController
+
+

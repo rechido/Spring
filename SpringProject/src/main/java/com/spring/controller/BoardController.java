@@ -30,7 +30,9 @@ public class BoardController {
 	@Inject
 	private BoardService service;
 	@Inject
-	private BoardDAO dao;
+	private BoardDAO dao;	
+	//@Inject
+	//private PageMaker pageMaker;
 
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {
@@ -45,11 +47,7 @@ public class BoardController {
 
 	// register form 제출시 응답하는 메소드
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPOST(BoardVO boardVO, RedirectAttributes redirectAtt) throws Exception { // redirectAtt
-																									// -
-																									// 개선된
-																									// 모델
-																									// 사용
+	public String registerPOST(BoardVO boardVO, RedirectAttributes redirectAtt) throws Exception { // redirectAtt 개선된 모델 사용
 		// public String registerPOST(BoardVO boardVO, Model model) throws
 		// Exception {
 

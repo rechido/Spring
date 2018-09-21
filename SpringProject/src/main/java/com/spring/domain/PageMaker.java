@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.spring.controller.BoardController;
-
 public class PageMaker {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PageMaker.class); // 로깅
@@ -31,21 +29,21 @@ public class PageMaker {
 	public String makeParameter(int page){
 		UriComponents uriComponents;
 		
-//		if(this.criteria.isSearchParameter){
-//			uriComponents = UriComponentsBuilder.newInstance()
-//					//.path("/{module}/{page}")
-//					.queryParam("page", page)
-//					.queryParam("perPageNum", ((SearchCriteria)criteria).getPerPageNum())
-//					.queryParam("searchType", ((SearchCriteria)criteria).getSearchType())
-//					.queryParam("keyword", ((SearchCriteria)criteria).getKeyword())
-//					.build(); // ex) ?page=1&perPageNum=10
-//		}else{
+		if(this.criteria.isSearchParameter){
+			uriComponents = UriComponentsBuilder.newInstance()
+					//.path("/{module}/{page}")
+					.queryParam("page", page)
+					.queryParam("perPageNum", ((SearchCriteria)criteria).getPerPageNum())
+					.queryParam("searchType", ((SearchCriteria)criteria).getSearchType())
+					.queryParam("keyword", ((SearchCriteria)criteria).getKeyword())
+					.build(); // ex) ?page=1&perPageNum=10
+		}else{
 			uriComponents = UriComponentsBuilder.newInstance()
 					//.path("/{module}/{page}")
 					.queryParam("page", page)
 					.queryParam("perPageNum", criteria.getPerPageNum())
 					.build(); // ex) ?page=1&perPageNum=10
-//		}
+		}
 		
 				
 		//logger.info("makePerPageNum(int page): "+uriComponents.toString());

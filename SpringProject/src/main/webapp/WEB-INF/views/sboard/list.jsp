@@ -94,8 +94,9 @@ console.log(formObj); // (크롬) 웹브라우저 개발자도구 콘솔창에�
 
 $(document).ready(function(){
 	$('#searchBtn').on('click', function(event){
-		self.location = "list"
-		+ "${pageMaker.makeParameter(1)}"
+		self.location = "list?"
+		+ "page=1"
+		+ "&perPageNum=${criteria.perPageNum}"
 		+ "&searchType=" + $('#searchSelect option:selected').val()
 		+ "&keyword=" + $('#keywordInput').val();
 	});
@@ -105,7 +106,11 @@ $(document).ready(function(){
 	});
 	
 	$('#perPageNumCntSelect').on('change', function(event){
-		self.location = "list?perPageNum=" + $("#perPageNumCntSelect option:selected").val();
+		self.location = "list?"
+			+ "page=1"
+			+ "&perPageNum=" + $("#perPageNumCntSelect option:selected").val()
+			+ "&searchType=${criteria.searchType}"
+			+ "&keyword=${criteria.keyword}";
 	});
 	
 	var result = '${result}'; // BoardController.java 에서 redirectAtt.addFlashAttribute("result", "Success!!");로 보낸 패러미터 호출
