@@ -15,30 +15,30 @@
 			rno desc
 	</select>
 	
-	<select id="create">
+	<insert id="create">
 		insert into
 			tbl_reply(bno, replytext, replyer)
 		values
 			(#{bno}, #{replytext}, #{replyer})
-	</select>
+	</insert>
 	
-	<select id="update">
+	<update id="update">
 		update 
 			tbl_reply 
 		set 
 			replytext=#{replytext}, updatedate=now()
 		where 
 			rno=#{rno}
-	</select>
+	</update>
 	
-	<select id="delete">
+	<delete id="delete">
 		delete from 
 			tbl_reply 
 		where 
 			rno=#{rno}
-	</select>
+	</delete>
 	
-	<select id="listPage">
+	<select id="listPage" resultType="ReplyVO">
 		select 
 			*
 		from
@@ -48,14 +48,14 @@
 		order by 
 			rno desc
 		limit 
-			#{criteria.page}, #{criteria.perPageNum}
+			#{criteria.pageStart}, #{criteria.perPageNum}
 	</select>
 	
-	<select id="countPaging">
+	<select id="countPaging" resultType="int">
 		select
 			count(bno)
 		from
-			tbl_board
+			tbl_reply
 		where
 			bno=#{bno}
 	</select>

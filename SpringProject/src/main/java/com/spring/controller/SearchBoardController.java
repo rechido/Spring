@@ -36,7 +36,7 @@ public class SearchBoardController {
 		
 		PageMaker pageMaker = new PageMaker();
 		
-		pageMaker.setCri(criteria);
+		pageMaker.setCriteria(criteria);
 		pageMaker.setTotalCount(service.listSearchCount(criteria));
 		
 		model.addAttribute("pageMaker", pageMaker);

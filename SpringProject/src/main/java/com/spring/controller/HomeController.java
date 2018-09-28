@@ -31,9 +31,11 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
+		logger.info("현재시간: {}", formattedDate);
+		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "time";
 	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)

@@ -79,8 +79,10 @@ public class ReplyController {
 			Criteria criteria = new Criteria();
 			criteria.setPage(page);
 			
+			logger.info("#listPage criteria: " + criteria.toString());
+			
 			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCri(criteria);
+			pageMaker.setCriteria(criteria);
 			
 			Map<String, Object> map = new HashMap<>();
 			List<ReplyVO> list = service.listReplyPage(bno, criteria);
@@ -92,7 +94,7 @@ public class ReplyController {
 			
 			map.put("pageMaker", pageMaker);
 			
-			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.OK);
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			
 		}catch(Exception e){
 			e.printStackTrace();

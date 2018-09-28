@@ -27,3 +27,8 @@ INSERT INTO
 	tbl_reply(bno, replytext, replyer )
 VALUES
 	(1055, '댓글', '댓글러');
+	
+INSERT INTO
+	tbl_reply(replytext, replyer )
+VALUES
+	('댓글', '댓글러');

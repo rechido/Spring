@@ -119,11 +119,11 @@ public class PageMaker {
 		this.displayPageNum = displayPageNum;
 	}
 
-	public Criteria getCri() {
+	public Criteria getCriteria() {
 		return criteria;
 	}
 
-	public void setCri(Criteria criteria) {
+	public void setCriteria(Criteria criteria) {
 		this.criteria = criteria;
 	}
 

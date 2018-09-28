@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"
+		integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<div id="displayDiv">
+	
+	</div>
+	
+<script id="template" type="text/x-handlebars-template">
+	<span> {{name}} </span>
+	<span> {{userid}} </span>
+	<span> {{addr}} </span>
+</script>
+
+<script>
+	var source = $("#template").html();					
+	var data = {name:"홍길동", userid:"admin", addr:"서울 송파구"};		
+	var template = Handlebars.compile(source);
+		
+	$("#displayDiv").html(template(data));
+</script>
+	
+	
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"
+		integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<ul id="replies">
+	
+	</ul>
+	
+<script id="template" type="text/x-handlebars-template">
+	{{#each .}}
+	<li class="replyLi">
+		<div>{{rno}}</div>
+		<div>{{replytext}}</div>
+		<div>{{replydate}}</div>
+	</li>
+	{{/each}}
+</script>
+
+<script>
+	var source = $("#template").html();					
+	//var data = {name:"홍길동", userid:"admin", addr:"서울 송파구"};		
+	var template = Handlebars.compile(source);
+	
+	var data = [
+	            {rno:1, replytext:"1번 댓글", replydate:new Date()},
+	            {rno:2, replytext:"2번 댓글", replydate:new Date()},
+	            {rno:3, replytext:"3번 댓글", replydate:new Date().toLocaleTimeString()},
+	            {rno:4, replytext:"4번 댓글", replydate:new Date().toLocaleString()},
+	            {rno:5, replytext:"5번 댓글", replydate:new Date().toLocaleDateString()}
+	            ];
+		
+	$("#replies").html(template(data));
+</script>
+
+</body>
+</html>
